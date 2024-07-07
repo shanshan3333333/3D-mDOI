@@ -1,0 +1,24 @@
+function F = RTEFunction(x,xdata)
+%% x = [mua,mus,g]
+mua=x(1);
+mus=x(2);
+g=x(3);
+Am=x(4);
+off=x(5);
+PI =3.1415926;
+na=1;
+nt=1.4;
+nel=nt/na;
+rd=-1.44* nel^-2+0.71* nel^-1+0.668+0.0636*nel;
+A=(1+rd)/(1-rd);
+D=1/(3*(mua+(1-g)*mus));
+zb=2*A*D;
+mus_reduce=mus*(1-g);
+mu_eff=sqrt(3*mua*(mua+mus_reduce));
+mut=mus_reduce+mua;
+z0=1/mut;
+r1=sqrt(z0^2+xdata.^2);
+r2=sqrt((z0+2*zb)^2+xdata.^2);
+albedo = mus_reduce/(mus_reduce + mua);
+F=Am*log(albedo/(4*PI)*(1/mut.*(mu_eff+(1./r1)).*exp(-mu_eff*r1)./(r1.^2)+...
+    (1/mut+2*zb).*(mu_eff+1./r2).*exp(-mu_eff*r2)./(r2.^2))+1e-8)+off;
