@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/825419472.svg)](https://zenodo.org/doi/10.5281/zenodo.12687293)
+
 # 3D-mDOI DEMO Instruction
 
 ## Task 1: Synthetic Phantom Generation
